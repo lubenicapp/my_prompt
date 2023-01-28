@@ -1,5 +1,5 @@
 # my_prompt
-to print a prompt like want
+to print a prompt like i want
 
 call this to try or export in ~/.bashrc:
 
