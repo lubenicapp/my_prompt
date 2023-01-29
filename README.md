@@ -7,8 +7,4 @@ call this to try or export in ~/.bashrc:
 export PS1="$(python pwd.py)"
 ```
 
-It shows 
-- virtual env in yellow
-- git branch in white
-- user@hostname in cyan
-- the working directory in blue : /Path/To/Dir => /P/T/Dir
+![terminal](terminal.png)
