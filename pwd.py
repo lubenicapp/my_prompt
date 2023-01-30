@@ -94,6 +94,7 @@ def get_venv():
     if venv_path is not None:
         return f"({venv_path.split('/')[-1]}) "
     return ''
+  
 
 def dogecoin():
     response = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd")
