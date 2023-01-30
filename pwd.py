@@ -93,6 +93,7 @@ def get_venv():
         return f"({venv_path.split('/')[-1]}) "
     return ''
 
+
 def dogecoin():
     try:
         import requests
