@@ -1,5 +1,4 @@
 #! /usr/bin/env python3
-import requests
 import subprocess
 from socket import gethostname
 import os
@@ -98,6 +97,7 @@ def get_venv():
 
 def dogecoin():
     try:
+        import requests  
         response = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd", timeout=0.8)
         if response.status_code == 200:
             value = response.json().get('dogecoin', '').get('usd', '')
