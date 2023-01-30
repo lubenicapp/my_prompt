@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+import requests
 import subprocess
 from socket import gethostname
 import os
@@ -30,7 +32,9 @@ STYLES = {
     "MAGENTA": "\033[35m",
     "CYAN": "\033[36m",
     "WHITE": "\033[37m",
-    "RESET": "\033[0m"
+    "RESET": "\033[0m",
+    "PURPLE": "\u001b[38;5;98m",
+    "DOGE": "\u001b[38;5;226m"
 }
 
 
@@ -39,7 +43,9 @@ def prompt():
         '┌─ ',
         s('GREEN', time.strftime('%H:%M')),
         ' ',
-        s('YELLOW', get_venv()),
+        s('DOGE', dogecoin()),
+        ' ',
+        s('PURPLE', get_venv()),
         s('WHITE', current_git_branch()),
         s('CYAN', s('BOLD', user_hostname())),
         ':',
@@ -80,9 +86,7 @@ def working_directory():
     wd = os.getcwd().replace(homedir, '~', 1)
     sp = wd.split('/')
     wd = '/'.join([s[0] for s in sp[0:-1] if len(s) > 0]) + f'/{sp[-1]}'
-    if wd == '/':
-        wd = '//'
-    return f"{wd[1:]}"
+    return f"{wd}"
 
 
 def get_venv():
@@ -91,7 +95,12 @@ def get_venv():
         return f"({venv_path.split('/')[-1]}) "
     return ''
 
+def dogecoin():
+    response = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd")
+    if response.status_code == 200:
+        value = response.json().get('dogecoin', '').get('usd', '')
+        return str(round(float(value), 3))
+    return ''
+
 
 prompt()
-
-
