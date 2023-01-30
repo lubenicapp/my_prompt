@@ -97,11 +97,14 @@ def get_venv():
   
 
 def dogecoin():
-    response = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd")
-    if response.status_code == 200:
-        value = response.json().get('dogecoin', '').get('usd', '')
-        return str(round(float(value), 3))
-    return ''
+    try:
+        response = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd", timeout=0.8)
+        if response.status_code == 200:
+            value = response.json().get('dogecoin', '').get('usd', '')
+            return str(round(float(value), 3)) + ' '
+        return ''
+    except Exception:
+        return ''
 
-
+    
 prompt()
