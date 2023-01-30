@@ -40,17 +40,16 @@ STYLES = {
 def prompt():
     p = [
         '┌─ ',
-        s('GREEN', time.strftime('%H:%M')),
+        s('GREEN', f"🕑{time.strftime('%H:%M')}"),
         ' ',
         s('DOGE', dogecoin()),
-        ' ',
         s('PURPLE', get_venv()),
         s('WHITE', current_git_branch()),
         s('CYAN', s('BOLD', user_hostname())),
         ':',
         '\n└─ ',
         s('BLUE', working_directory()),
-        s('MAGENTA', permission()),
+        s('MAGENTA', s('BOLD', permission())),
         ' '
     ]
     print(''.join(p))
@@ -63,7 +62,7 @@ def s(style, text):
 def permission():
     if os.getuid() == 0:
         return '>'
-    return '>$'
+    return '>💲'
 
 
 def current_git_branch():
@@ -93,18 +92,17 @@ def get_venv():
     if venv_path is not None:
         return f"({venv_path.split('/')[-1]}) "
     return ''
-  
 
 def dogecoin():
     try:
-        import requests  
-        response = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd", timeout=0.8)
+        import requests
+        response = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd", timeout=5)
         if response.status_code == 200:
             value = response.json().get('dogecoin', '').get('usd', '')
-            return str(round(float(value), 3)) + ' '
+            return '🐕' + str(round(float(value), 3)) + ' '
         return ''
     except Exception:
         return ''
 
-    
+
 prompt()
