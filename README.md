@@ -7,4 +7,9 @@ call this to try or export in ~/.bashrc:
 export PS1="$(python pwd.py)"
 ```
 
+if happy
+```
+PROMPT_COMMAND='PS1="$(/usr/bin/pwd.py)"'
+```
+
 ![terminal](terminal.png)
