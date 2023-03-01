@@ -44,7 +44,7 @@ def prompt():
         ' ',
         s('DOGE', dogecoin()),
         s('PURPLE', get_venv()),
-        s('WHITE', current_git_branch()),
+        current_git_branch(),
         s('CYAN', s('BOLD', user_hostname())),
         ':',
         '\n└─ ',
@@ -69,7 +69,11 @@ def current_git_branch():
     result = subprocess.run(["git", "branch", "--show-current"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     branch = result.stdout.decode().strip()
     if len(branch) > 0:
-        return f"({branch}) "
+        status = subprocess.run(['git', 'status', '-s'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        status = len(status.stdout.decode()) > 0
+        if status:
+            return s('YELLOW', f"({branch}) ")
+        return s('GREEN', f"({branch}) ")
     return ''
 
 
