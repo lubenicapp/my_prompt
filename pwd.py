@@ -5,8 +5,6 @@ import os
 import sys
 import time
 
-# export PS1="$(python pwd.py)"
-
 # ┌─ ─ ─┐
 # └─ ─ ─┘
 # ├─ ─ ─┤
@@ -40,9 +38,9 @@ STYLES = {
 def prompt():
     p = [
         '┌─ ',
-        s('GREEN', f"🕑{time.strftime('%H:%M')}"),
+        s('WHITE', f"🕑{time.strftime('%H:%M')}"),
         ' ',
-        s('DOGE', dogecoin()),
+        # s('DOGE', dogecoin()),
         s('PURPLE', get_venv()),
         current_git_branch(),
         s('CYAN', s('BOLD', user_hostname())),
@@ -62,7 +60,7 @@ def s(style, text):
 def permission():
     if os.getuid() == 0:
         return '>'
-    return '>💲'
+    return '>$'
 
 
 def current_git_branch():
